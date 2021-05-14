@@ -7,56 +7,7 @@ import huelLogo from './images/huel.png'
 
 const App: React.FC = () => {
 
-  interface ITheme {
-    backgroundColor: string;
-    profileImageShapeType: string;
-  }
-  interface IActionData {
-    link: string;
-  }
-  interface ILink {
-    provider: string;
-    ur: string;
-    title: string;
-    actionData: IActionData;
-  }
-  interface IPage {
-  displayName: string;
-  profileImage: string;
-  shortUrl: string;
-  share: boolean;
-  links: ILink;
-  theme: ITheme;
-}
-interface IInfluencer {
-  id: number;
-  email: string;
-  pages: IPage[];
-}
-
-const [influencers, setInfluencers] = useState(
-  [{ 
-    id: 0,
-    pages:[{
-        id:0,
-        displayName:'',
-        caption:'',
-        profileImage:'',
-        shortUrl:'',
-        theme: {
-          backgroundColor: 'white',
-          profileImageShapeType: ''
-        },
-        links: [{
-          provider:'',
-          title:'',
-          actionData: [{
-            link: ''
-          }]
-        }]
-      }]
-  }]
-)
+const [influencers, setInfluencers] = useState<any[]>([]);
 
 useEffect(() => {
   const urlInfluencers = 'https://dtxsharedprodcdn2.blob.core.windows.net/random/flowpages-mock-data.json';
@@ -69,7 +20,7 @@ useEffect(() => {
   getInfluencers();
 },[])
 
-const getLinkImageUrl = (link: ILink) => {
+const getLinkImageUrl = (link) => {
   if (link.provider === 'link') {
     var matches = link.actionData.link.match('https?://([A-Za-z_0-9.-]+).*');
     if (matches){
