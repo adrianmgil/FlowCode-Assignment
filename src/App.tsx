@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import flowcodeLogo from './images/flowcode.jpg'
-import linkedinLogo from './images/linkedin.png'
-import nytimesLogo from './images/nytimes.jpg'
-import huelLogo from './images/huel.png'
+import flowcodeLogo from './images/flowcode.jpg';
+import linkedinLogo from './images/linkedin.png';
+import nytimesLogo from './images/nytimes.jpg';
+import huelLogo from './images/huel.png';
+import shareIcon from './images/share.png';
+import $ from 'jquery'
+require('jquery-ui');
+require('jquery-ui/ui/widgets/sortable');
+require('jquery-ui/ui/disable-selection');
 
 const App: React.FC = () => {
 
@@ -18,6 +23,8 @@ useEffect(() => {
   };
 
   getInfluencers();
+  
+  $('.draggableContainer').sortable();
 },[])
 
 const getLinkImageUrl = (link) => {
@@ -51,10 +58,19 @@ const buildInfluencers = () => {
       <div className="profile" style={{backgroundColor: page.theme.backgroundColor}} key={i.id}>
         <img className={page.theme.profileImageShapeType} src={page.profileImage} alt='' onClick={() => { window.open(page.shortUrl); }}/>
         <div>{page.displayName}</div>
+        {page.share === true ? <img src={shareIcon} className="shareIcon" onClick={() => { shareFlowcode(page.shortUrl);} } /> : null}
         <div className="caption">{page.caption}</div>
         {buildLinks(page.links)}
         </div>)
   })
+}
+const shareFlowcode = (url) => {
+  const textarea = document.createElement('textarea');
+  textarea.value = url;
+  document.body.appendChild(textarea);
+  textarea.select();
+  document.execCommand('copy');
+  document.body.removeChild(textarea);
 }
 
 const buildLinks = (links) => {
@@ -72,7 +88,7 @@ return (
     <div className="App">
       <header className="App-header">
         <h3>See how influencers, brands and more are using Flowpage</h3>
-        <div className="container">
+        <div className="container draggableContainer">
           {buildInfluencers()}
         </div>
       </header>

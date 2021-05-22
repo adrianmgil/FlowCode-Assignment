@@ -78,3 +78,8 @@
   max-height: 50px;
   max-width: 50px;
 }
+.shareIcon {
+  width:20px !important;
+  height: 20px !important;
+  float: right;
+}
