@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import flowcodeLogo from './images/flowcode.jpg';
-import linkedinLogo from './images/linkedin.png';
-import nytimesLogo from './images/nytimes.jpg';
-import huelLogo from './images/huel.png';
+import { getUrl } from './image';
 import shareIcon from './images/share.png';
+import SharePopup from './SharePopup';
 import $ from 'jquery'
 require('jquery-ui');
 require('jquery-ui/ui/widgets/sortable');
@@ -13,6 +11,7 @@ require('jquery-ui/ui/disable-selection');
 const App: React.FC = () => {
 
 const [influencers, setInfluencers] = useState<any[]>([]);
+const [shareUrl, setShareUrl] = useState<any>();
 
 useEffect(() => {
   const urlInfluencers = 'https://dtxsharedprodcdn2.blob.core.windows.net/random/flowpages-mock-data.json';
@@ -24,30 +23,20 @@ useEffect(() => {
 
   getInfluencers();
   
-  $('.draggableContainer').sortable();
+  $('.containerFlowCode').sortable();
 },[])
 
-const getLinkImageUrl = (link) => {
+const getLinkImageUrl = (link : any) => {
   if (link.provider === 'link') {
     var matches = link.actionData.link.match('https?://([A-Za-z_0-9.-]+).*');
     if (matches){
       const s = matches[1].split('.');
       const domain = s.slice(-2,-1)[0];
-      return getImageLogoUrl(domain);
+      return getUrl(domain);
     }
     return '';
   }
-  return getImageLogoUrl(link.provider);
-}
-
-const getImageLogoUrl = (title: string) => {
-  switch (title) {
-    case 'linkedin': return linkedinLogo;
-    case 'flowcode': return flowcodeLogo;
-    case 'nytimes': return nytimesLogo;
-    case 'huel': return huelLogo;
-    default: return '';
-  }
+  return getUrl(link.provider);
 }
 
 const buildInfluencers = () => {
@@ -56,27 +45,19 @@ const buildInfluencers = () => {
 
     return (
       <div className="profile" style={{backgroundColor: page.theme.backgroundColor}} key={i.id}>
-        <img className={page.theme.profileImageShapeType} src={page.profileImage} alt='' onClick={() => { window.open(page.shortUrl); }}/>
+        <img className={page.theme.profileImageShapeType} src={page.profileImage} alt='' />
         <div>{page.displayName}</div>
-        {page.share === true ? <img src={shareIcon} className="shareIcon" onClick={() => { shareFlowcode(page.shortUrl);} } /> : null}
+        {page.share === true ? <img src={shareIcon} className="shareIcon" onClick={ () => { setShareUrl(page.shortUrl) } } /> : null}
         <div className="caption">{page.caption}</div>
         {buildLinks(page.links)}
-        </div>)
+      </div>)
   })
 }
-const shareFlowcode = (url) => {
-  const textarea = document.createElement('textarea');
-  textarea.value = url;
-  document.body.appendChild(textarea);
-  textarea.select();
-  document.execCommand('copy');
-  document.body.removeChild(textarea);
-}
 
-const buildLinks = (links) => {
+const buildLinks = (links : any) => {
   return links.map(l => {
     return (
-      <div className="link" onClick={() => { window.open(l.actionData.link); }}>
+      <div className="link" onClick={() => { window.open(l.actionData.link); }} key={l.id}>
         <div><img src={getLinkImageUrl(l)} alt=''></img></div>
         <div className="title">{l.title}</div>
       </div>
@@ -84,11 +65,16 @@ const buildLinks = (links) => {
   });
 }
 
+const handleCloseModal = () => {
+  setShareUrl('');
+};
+
 return (
     <div className="App">
       <header className="App-header">
         <h3>See how influencers, brands and more are using Flowpage</h3>
-        <div className="container draggableContainer">
+        <SharePopup url={shareUrl} onCloseModal={handleCloseModal} />
+        <div className="containerFlowCode">
           {buildInfluencers()}
         </div>
       </header>

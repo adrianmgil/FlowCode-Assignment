@@ -1,0 +1,25 @@
+.containerPopup {
+    position: absolute;
+    min-width: 300px;
+    background-color: #000;
+    border: 4px solid #808080;
+    color: white;
+    font-size: 14px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding:10px;
+}
+.title {
+    text-align: center;
+}
+
+button {
+    background-color: #444444;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin: 4px;
+    height: 24px;
+    width: 150px;
+}
