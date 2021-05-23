@@ -9,12 +9,19 @@ const SharePopup = ({url, onCloseModal}) => {
                       <div>
                         <div><button onClick={() => {shareToClipboard(url); onCloseModal();}}>To Clipboard</button></div>
                         <div><button onClick={() => {window.open(url); onCloseModal();}}>Open new window</button></div>
+                        {/*<div><button onClick={() => {shareToFacebookMessenger(url); onCloseModal();}}>Facebook Messenger</button></div>*/}
+                        <div><button onClick={() => {onCloseModal();}}>Close</button></div>
                       </div>
                     }
             onCloseModal={onCloseModal}
           />;
 }
-
+/*
+const shareToFacebookMessenger = (url:string) => {
+  setTimeout(() => { window.location.href = url;}, 25);
+  window.location.href = 'fb://';
+}
+*/
 const shareToClipboard = (url : string) => {
   const textarea = document.createElement('textarea');
   textarea.value = url;

@@ -47,7 +47,7 @@ const buildInfluencers = () => {
       <div className="profile" style={{backgroundColor: page.theme.backgroundColor}} key={i.id}>
         <img className={page.theme.profileImageShapeType} src={page.profileImage} alt='' />
         <div>{page.displayName}</div>
-        {page.share === true ? <img src={shareIcon} className="shareIcon" onClick={ () => { setShareUrl(page.shortUrl) } } /> : null}
+        {page.share === true ? <img src={shareIcon} className="shareIcon" onClick={ () => { setShareUrl(page.shortUrl) } } alt='' /> : null}
         <div className="caption">{page.caption}</div>
         {buildLinks(page.links)}
       </div>)

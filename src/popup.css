@@ -1,9 +1,9 @@
 .containerPopup {
     position: absolute;
     min-width: 300px;
-    background-color: #000;
-    border: 4px solid #808080;
-    color: white;
+    background-color: #EEEEEE;
+    border: 4px solid #BBBBBB;
+    color: black;
     font-size: 14px;
     left: 50%;
     top: 50%;
@@ -15,7 +15,7 @@
 }
 
 button {
-    background-color: #444444;
+    background-color: #808080;
     color: white;
     border: none;
     cursor: pointer;
