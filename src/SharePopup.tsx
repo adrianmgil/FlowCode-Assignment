@@ -1,11 +1,10 @@
 import React from "react";
 import Popup from './Popup';
+import { FacebookShareButton, LinkedinShareButton, TwitterShareButton } from 'react-share';
 import { getImageUrl } from './image';
 import './SharePopup.css';
 
 const SharePopup = ({url, onCloseModal}) => {
-
-    const apps = ['facebook', 'twitter', 'instagram'];
 
     const shareToClipboard = (url: string) => {
       const textarea = document.createElement('textarea');
@@ -22,22 +21,18 @@ const SharePopup = ({url, onCloseModal}) => {
       onCloseModal();
     }
     
-    const shareToApp = (url: string) => {
-      //setTimeout(() => { window.location.href = url;}, 25);
-      //window.location.href = 'fb://';
-      alert('This function is currently not available.')
-    }
-
     return  <Popup 
             isVisible={url ? true:false}
             title='Share'
             content={
                       <div>
+                        <div className='app'>
+                          <FacebookShareButton url={url} quote={'test'} hashtag={'test'} onClick={onCloseModal} ><img src={getImageUrl('facebook')} alt=''/></FacebookShareButton>
+                          <TwitterShareButton url={url} title={'Flowcode'} onClick={onCloseModal}><img src={getImageUrl('twitter')} alt=''/></TwitterShareButton>
+                          <LinkedinShareButton url={url} title={'Flowcode'} onClick={onCloseModal} ><img src={getImageUrl('linkedin')} alt=''/></LinkedinShareButton>
+                        </div>
                         <div><button onClick={() => {shareToClipboard(url); }}>To Clipboard</button></div>
                         <div><button onClick={() => {shareToNewWindow(url); }}>Open new window</button></div>
-                        <div>
-                            {apps.map(a => { return <img src={getImageUrl(a)} onClick={() => {shareToApp(url); }} alt='' key={a} /> })}
-                        </div>
                         <div><button onClick={() => {onCloseModal();}}>Close</button></div>
                       </div>
                     }
