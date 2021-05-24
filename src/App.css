@@ -50,7 +50,6 @@
 .profile > img {
   width: 100px;
   height: 100px;
-  cursor: pointer;
 }
 .circle {
   border-radius: 50%;
@@ -82,4 +81,5 @@
   width:20px !important;
   height: 20px !important;
   float: right;
+  cursor: pointer;
 }

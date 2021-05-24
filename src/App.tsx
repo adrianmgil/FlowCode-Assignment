@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
-import { getUrl } from './image';
+import { getImageUrl } from './image';
 import shareIcon from './images/share.png';
 import SharePopup from './SharePopup';
 import $ from 'jquery'
@@ -32,11 +32,11 @@ const getLinkImageUrl = (link : any) => {
     if (matches){
       const s = matches[1].split('.');
       const domain = s.slice(-2,-1)[0];
-      return getUrl(domain);
+      return getImageUrl(domain);
     }
     return '';
   }
-  return getUrl(link.provider);
+  return getImageUrl(link.provider);
 }
 
 const buildInfluencers = () => {
