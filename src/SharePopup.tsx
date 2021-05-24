@@ -36,7 +36,7 @@ const SharePopup = ({url, onCloseModal}) => {
                         <div><button onClick={() => {shareToClipboard(url); }}>To Clipboard</button></div>
                         <div><button onClick={() => {shareToNewWindow(url); }}>Open new window</button></div>
                         <div>
-                            {apps.map(a => { return <img src={getImageUrl(a)} onClick={() => {shareToApp(url); }} alt='' /> })}
+                            {apps.map(a => { return <img src={getImageUrl(a)} onClick={() => {shareToApp(url); }} alt='' key={a} /> })}
                         </div>
                         <div><button onClick={() => {onCloseModal();}}>Close</button></div>
                       </div>
