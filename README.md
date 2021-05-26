@@ -30,6 +30,6 @@ To get a better sense of this assignment you are encouraged to visit [https://fl
 # Documentation guide
 
 #### Here is my screenshot ####
-![alt text](https://github.com/adrianmgil/FlowCode-Assignment/blob/main/flowcode_rearrange.gif)
-![alt text](https://github.com/adrianmgil/FlowCode-Assignment/blob/main/flowcode_shareapp.gif)
+![Alt Text](https://github.com/adrianmgil/FlowCode-Assignment/blob/main/Flowcode_rearrange.gif)
+![Alt Text](https://github.com/adrianmgil/FlowCode-Assignment/blob/main/Flowcode_shareapp.gif)
 ![alt text](https://github.com/adrianmgil/FlowCode-Assignment/blob/main/flowcode.jpg)
